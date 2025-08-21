@@ -1,20 +1,20 @@
 🔗 Blockchain-based Academic Certificate Verification
 
-## 📌 Project Overview
+ 📌 Project Overview
         -> This project is a simplified blockchain application that ensures the authenticity of student academic certificates. Instead of traditional paper-based certificates, each certificate is stored as a block in a blockchain. This makes it tamper-proof — if anyone tries to modify data, the chain breaks, and the fraud is detected.
 
-##  The system includes:
-### 👩‍🏫 Multi-user authentication (for incharges/teachers).
-### 🔑 Password protection & forgot-password recovery using a common secret code.
-### 📚 Section, Year of Study, and Subject-based entry of student certificate details.
-### 🎓 Certificate ID auto-generation (e.g., English → E001, E002, …).
-### 🔍 Certificate Verification by entering the Certificate ID.
+  The system includes:
+ 👩‍🏫 Multi-user authentication (for incharges/teachers).
+ 🔑 Password protection & forgot-password recovery using a common secret code.
+ 📚 Section, Year of Study, and Subject-based entry of student certificate details.
+🎓 Certificate ID auto-generation (e.g., English → E001, E002, …).
+ 🔍 Certificate Verification by entering the Certificate ID.
 ------------------------------------------
 ##⚡ Features:
-###1.Secure Authentication
-###-Only authorized incharges can log in with username and password.
-###-If the password is entered wrong twice, the system flags suspicious activity and notifies the admin.
-###-Forgot password? → Enter the common secret code to reset access.
+### 1.Secure Authentication
+-Only authorized incharges can log in with username and password.
+-If the password is entered wrong twice, the system flags suspicious activity and notifies the admin.
+-Forgot password? → Enter the common secret code to reset access.
 
 ###2.Certificate Entry : Incharge selects Year, Section, Subject once → all student entries belong to that context.
 ###Each certificate stores: Student Name,Roll Number,Subject,Year & Section,Percentage Score
