@@ -3,8 +3,8 @@
  📌 Project Overview
         -> This project is a simplified blockchain application that ensures the authenticity of student academic certificates. Instead of traditional paper-based certificates, each certificate is stored as a block in a blockchain. This makes it tamper-proof — if anyone tries to modify data, the chain breaks, and the fraud is detected.
 
-  The system includes:
- 👩‍🏫 Multi-user authentication (for incharges/teachers).
+  ## The system includes:
+ 👩‍🏫### Multi-user authentication (for incharges/teachers).
  🔑 Password protection & forgot-password recovery using a common secret code.
  📚 Section, Year of Study, and Subject-based entry of student certificate details.
 🎓 Certificate ID auto-generation (e.g., English → E001, E002, …).
