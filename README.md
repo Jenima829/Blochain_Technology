@@ -27,4 +27,4 @@ Each certificate stores: Student Name,Roll Number,Subject,Year & Section,Percent
 🏗️ Tech Stack
 Language: Python 3
 Core Concepts: Blockchain (Hashing, Blocks, Chain Verification)
-Security: Username-password authentication + secret code recovery
+Security: Username-password authentication + secret code recovery.
