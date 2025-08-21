@@ -1,7 +1,11 @@
 🔗 Blockchain-based Academic Certificate Verification
 
- 📌 Project Overview <br>
-        ### This project is a simplified blockchain application that ensures the authenticity of student academic certificates. Instead of traditional paper-based certificates, each certificate is stored as a block in a blockchain. This makes it tamper-proof — if anyone tries to modify data, the chain breaks, and the fraud is detected.
+📌 Project Overview  
+
+This project is a simplified blockchain application that ensures the authenticity of student academic certificates.  
+Instead of traditional paper-based certificates, each certificate is stored as a block in a blockchain.  
+This makes it tamper-proof — if anyone tries to modify data, the chain breaks, and the fraud is detected.
+
 ------------------------------------------
 ⚡ Features:
 #### 1.Secure Authentication
