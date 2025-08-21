@@ -1,0 +1,166 @@
+import hashlib
+import time
+
+# Blockchain structure
+class Block:
+    def __init__(self, index, timestamp, data, previous_hash):
+        self.index = index
+        self.timestamp = timestamp
+        self.data = data
+        self.previous_hash = previous_hash
+        self.hash = self.calculate_hash()
+
+    def calculate_hash(self):
+        block_string = str(self.index) + str(self.timestamp) + str(self.data) + str(self.previous_hash)
+        return hashlib.sha256(block_string.encode()).hexdigest()
+
+class Blockchain:
+    def __init__(self):
+        self.chain = [self.create_genesis_block()]
+
+    def create_genesis_block(self):
+        return Block(0, time.time(), {"message": "Genesis Block"}, "0")
+
+    def get_latest_block(self):
+        return self.chain[-1]
+
+    def add_block(self, new_block):
+        new_block.previous_hash = self.get_latest_block().hash
+        new_block.hash = new_block.calculate_hash()
+        self.chain.append(new_block)
+
+    def is_chain_valid(self):
+        for i in range(1, len(self.chain)):
+            curr = self.chain[i]
+            prev = self.chain[i-1]
+
+            if curr.hash != curr.calculate_hash():
+                return False
+            if curr.previous_hash != prev.hash:
+                return False
+        return True
+    
+    def find_certificate_by_id(self, cert_id):
+        for block in self.chain:
+            if isinstance(block.data, dict) and block.data.get("Certificate ID") == cert_id:
+                return block.data
+        return None
+
+
+# User Authentication
+incharges = {
+    "incharge1": "pass1",
+    "incharge2": "pass2",
+    "incharge3": "pass3",
+    "incharge4": "pass4",
+    "incharge5": "pass5"
+}
+secret_code = "TEACHER123"
+
+def authenticate():
+    username = input("Enter username: ")
+    if username not in incharges:
+        print("Invalid username.")
+        return False
+
+    attempts = 0
+    while attempts < 2:
+        password = input("Enter password: ")
+        if password == incharges[username]:
+            print("Login successful!\n")
+            return True
+        else:
+            attempts += 1
+            print("Incorrect password. Try again.")
+    print("Too many wrong attempts. Suspicious activity reported to admin.\n")
+    return False
+
+def forgot_password():
+    code = input("Enter secret code for teachers: ")
+    if code == secret_code:
+        print("Access granted via secret code.\n")
+        return True
+    else:
+        print("Incorrect secret code.\n")
+        return False
+
+
+# Certificate ID Generator
+cert_counters = {}
+
+def generate_certificate_id(course):
+    first_letter = course[0].upper()
+    if first_letter not in cert_counters:
+        cert_counters[first_letter] = 1
+    else:
+        cert_counters[first_letter] += 1
+    return f"{first_letter}{cert_counters[first_letter]:03d}"
+
+
+# Menu system
+def menu(blockchain):
+    while True:
+        print("\n--- MENU ---")
+        print("1. Add Certificates for a Section")
+        print("2. View Blockchain Data")
+        print("3. Verify Certificate by ID")
+        print("4. Exit")
+        choice = input("Enter choice: ")
+
+        if choice == "1":
+            year = input("Enter Year of Study: ")
+            section = input("Enter Section: ")
+            subject = input("Enter Subject/Course: ")
+
+            n = int(input("How many students' certificates do you want to add? "))
+            for _ in range(n):
+                name = input("Enter Student Name: ")
+                roll = input("Enter Roll Number: ")
+                percentage = input("Enter Percentage Score: ")
+
+                cert_id = generate_certificate_id(subject)
+                certificate = {
+                    "Certificate ID": cert_id,
+                    "Name": name,
+                    "Roll No": roll,
+                    "Year": year,
+                    "Section": section,
+                    "Course": subject,
+                    "Percentage": percentage
+                }
+                blockchain.add_block(Block(len(blockchain.chain), time.time(), certificate, blockchain.get_latest_block().hash))
+                print(f"Certificate Added Successfully with ID: {cert_id}")
+
+        elif choice == "2":
+            for block in blockchain.chain:
+                print(vars(block))
+
+        elif choice == "3":
+            cert_id = input("Enter Certificate ID to Verify: ")
+            result = blockchain.find_certificate_by_id(cert_id)
+            if result:
+                print("✅ Certificate Found:", result)
+            else:
+                print("❌ Certificate Not Found.")
+
+        elif choice == "4":
+            print("Exiting...")
+            break
+        else:
+            print("Invalid choice. Try again.")
+
+
+# Main Execution
+blockchain = Blockchain()
+
+print("Welcome to Blockchain Certificate System\n")
+option = input("1. Login\n2. Forgot Password\nChoose option: ")
+
+if option == "1":
+    if authenticate():
+        menu(blockchain)
+elif option == "2":
+    if forgot_password():
+        menu(blockchain)
+else:
+    print("Invalid option.")
